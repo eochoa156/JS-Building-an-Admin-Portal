@@ -22,6 +22,16 @@ let response = await fetch('http://localhost:9001/updateBook', {
 let updatedBook = await response.json()
 console.log(updatedBook);
 
+let response = await fetch('http://localhost:3000/admin.html',{
+    method: "POST",
+    headers: null,
+    body: null,
+});
+let books = await response.json()
+console.log(books);
+
+books.forEach(renderBook)
+
 function renderBook(book) {
     let bookContainer = document.querySelector('.book-container')
     bookContainer.innerHTML += `
