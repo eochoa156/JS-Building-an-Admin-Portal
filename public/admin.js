@@ -1,27 +1,10 @@
-let response = await fetch('http://localhost:3001/listBooks', {
-    method: 'GET',
-    headers: null,
-    body: null
-});
+async function main() {
 
-let books = await response.json();
-console.log(books);
+    let response = await fetch('http://localhost:3001/listBooks')
+    let books = await response.json()
 
-books.forEach(renderBook)
-
-let updateBook = await fetch('http://localhost:9001/updateBook', {
-    method: 'PATCH',
-    headers: {
-        'Content-Type' : 'application/json'
-    },
-    body: JSON.stringify({
-        "id": 3,
-        "title": "Legends of Arathrae",
-    }),
-})
-
-let updatedBook = await updateBook.json();
-console.log(updatedBook);
+    books.forEach(renderBook)
+}
 
 function renderBook(book) {
     let bookContainer = document.querySelector('.book-container')
@@ -36,8 +19,11 @@ function renderBook(book) {
                     <h5 class="card-title">${book.title}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Available: ${book.quantity}</h6>
                     <p class="card-text">${book.description}</p>
+                    <div>
                 </div>
             </div>
         </div>
     `
 }
+
+main()
