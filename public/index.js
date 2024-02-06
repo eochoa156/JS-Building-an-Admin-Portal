@@ -10,6 +10,20 @@ async function main() {
     console.log(books);
 
     books.forEach(renderBook)
+
+    let updateBook = await fetch('http://localhost:9001/updateBook', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+            "id": 3,
+            "title": "Legends of Arathrae",
+        }),
+    })
+
+    let updatedBook = await updateBook.json();
+    console.log(updatedBook);
 }
 
 function renderBook(book) {
